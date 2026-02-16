@@ -1,0 +1,17 @@
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" fill="#006D66" rx="32"/>
+  <g transform="translate(48, 64)">
+    <!-- Car icon -->
+    <path d="M 24 52 L 16 32 C 14 27 16 24 20 24 L 76 24 C 80 24 82 27 80 32 L 72 52" 
+          fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 8 52 L 8 68 C 8 72 10 74 14 74 L 18 74 C 20 74 22 72 22 68 L 22 64" 
+          fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 74 64 L 74 68 C 74 72 76 74 78 74 L 82 74 C 86 74 88 72 88 68 L 88 52" 
+          fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <line x1="8" y1="52" x2="88" y2="52" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="24" cy="60" r="5" fill="white"/>
+    <circle cx="72" cy="60" r="5" fill="white"/>
+    <path d="M 28 32 L 32 32 L 36 24 L 60 24 L 64 32 L 68 32" 
+          fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

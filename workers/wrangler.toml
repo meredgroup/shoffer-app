@@ -1,0 +1,44 @@
+name = "shoffer-api"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "shoffer-api-prod"
+
+# D1 Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "shoffer-db"
+database_id = "your-database-id-here"
+
+# KV Namespace (optional - commented out for now)
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "your-kv-id-here"
+
+# R2 Bucket (optional - commented out for now)
+# [[r2_buckets]]
+# binding = "UPLOADS"
+# bucket_name = "shoffer-uploads"
+
+# Durable Objects (commented out for initial setup)
+# [[durable_objects.bindings]]
+# name = "CHAT"
+# class_name = "ChatRoom"
+# script_name = "shoffer-api"
+
+# [[durable_objects.bindings]]
+# name = "BOOKING"
+# class_name = "BookingSession"
+# script_name = "shoffer-api"
+
+# [[migrations]]
+# tag = "v1"
+# new_classes = ["ChatRoom", "BookingSession"]
+
+# Environment Variables
+[vars]
+JWT_SECRET = "your-jwt-secret-change-in-production-please-use-long-random-string"
+TURNSTILE_SECRET_KEY = "1x0000000000000000000000000000000AA"
+ENVIRONMENT = "development"

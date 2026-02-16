@@ -1,0 +1,25 @@
+{
+    "name": "shoffer-workers",
+    "version": "1.0.0",
+    "description": "Shoffer API - Cloudflare Workers Backend",
+    "private": true,
+    "scripts": {
+        "dev": "wrangler dev",
+        "deploy": "wrangler deploy",
+        "tail": "wrangler tail"
+    },
+    "dependencies": {
+        "hono": "^4.6.14",
+        "@hono/zod-validator": "^0.4.1",
+        "zod": "^3.22.4",
+        "bcryptjs": "^2.4.3",
+        "jsonwebtoken": "^9.0.2"
+    },
+    "devDependencies": {
+        "@cloudflare/workers-types": "^4.20241218.0",
+        "@types/bcryptjs": "^2.4.6",
+        "@types/jsonwebtoken": "^9.0.7",
+        "wrangler": "^3.0.0",
+        "typescript": "^5.3.3"
+    }
+}
