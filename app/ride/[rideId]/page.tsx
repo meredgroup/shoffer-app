@@ -32,6 +32,8 @@ interface Ride {
     license_plate: string;
 }
 
+export const runtime = 'edge';
+
 export default function RideDetailPage({ params }: { params: Promise<{ rideId: string }> }) {
     const { rideId } = use(params);
     const [mounted, setMounted] = useState(false);

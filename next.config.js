@@ -3,7 +3,6 @@ const nextConfig = {
     reactStrictMode: true,
 
     // Cloudflare Pages compatibility
-    output: 'export',
     images: {
         unoptimized: true, // Cloudflare Images handles optimization
     },

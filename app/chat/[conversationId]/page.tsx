@@ -13,6 +13,8 @@ interface Message {
     created_at: number;
 }
 
+export const runtime = 'edge';
+
 export default function ChatRoomPage({ params }: { params: Promise<{ conversationId: string }> }) {
     const { conversationId } = use(params);
 

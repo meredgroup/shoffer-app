@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { formatJalaliDate, toPersianNumber } from '@/lib/jalali';
 
+export const runtime = 'edge';
+
 export default function DriverProfilePage({ params }: { params: Promise<{ id: string }> }) {
     const { id: userId } = use(params);
     const [mounted, setMounted] = useState(false);

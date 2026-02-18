@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toPersianNumber } from '@/lib/jalali';
 
+export const runtime = 'edge';
+
 export default function RateBookingPage({ params }: { params: Promise<{ bookingId: string }> }) {
     const { bookingId } = use(params);
     const [mounted, setMounted] = useState(false);
