@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, use } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { formatTime } from '@/lib/jalali';
@@ -13,7 +13,9 @@ interface Message {
     created_at: number;
 }
 
-export default function ChatRoomPage({ params }: { params: { conversationId: string } }) {
+export default function ChatRoomPage({ params }: { params: Promise<{ conversationId: string }> }) {
+    const { conversationId } = use(params);
+
     const [mounted, setMounted] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState('');
@@ -59,7 +61,7 @@ export default function ChatRoomPage({ params }: { params: { conversationId: str
 
         try {
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/chat/${params.conversationId}/messages`,
+                `${process.env.NEXT_PUBLIC_API_URL}/chat/${conversationId}/messages`,
                 {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -85,7 +87,7 @@ export default function ChatRoomPage({ params }: { params: { conversationId: str
         if (!token) return;
 
         const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8787';
-        const websocket = new WebSocket(`${wsUrl}/chat/ws/${params.conversationId}?token=${token}`);
+        const websocket = new WebSocket(`${wsUrl}/chat/ws/${conversationId}?token=${token}`);
 
         websocket.onopen = () => {
             console.log('WebSocket connected');

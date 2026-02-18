@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { toPersianNumber } from '@/lib/jalali';
 
-export default function RateBookingPage() {
-    const params = useParams();
-    const bookingId = params.bookingId as string;
+export default function RateBookingPage({ params }: { params: Promise<{ bookingId: string }> }) {
+    const { bookingId } = use(params);
     const [mounted, setMounted] = useState(false);
     const [loading, setLoading] = useState(false);
     const [booking, setBooking] = useState<any>(null);

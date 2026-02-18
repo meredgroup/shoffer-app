@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { formatJalaliDate, toPersianNumber } from '@/lib/jalali';
 
-export default function DriverProfilePage() {
-    const params = useParams();
-    const userId = params.id as string;
+export default function DriverProfilePage({ params }: { params: Promise<{ id: string }> }) {
+    const { id: userId } = use(params);
     const [mounted, setMounted] = useState(false);
     const [driver, setDriver] = useState<any>(null);
     const [ratings, setRatings] = useState<any[]>([]);

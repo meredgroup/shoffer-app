@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { formatJalaliDateTime, formatPrice as formatPersianPrice, toPersianNumber } from '@/lib/jalali';
@@ -32,7 +32,8 @@ interface Ride {
     license_plate: string;
 }
 
-export default function RideDetailPage({ params }: { params: { rideId: string } }) {
+export default function RideDetailPage({ params }: { params: Promise<{ rideId: string }> }) {
+    const { rideId } = use(params);
     const [mounted, setMounted] = useState(false);
     const [ride, setRide] = useState<Ride | null>(null);
     const [loading, setLoading] = useState(true);
@@ -44,12 +45,12 @@ export default function RideDetailPage({ params }: { params: { rideId: string } 
     useEffect(() => {
         setMounted(true);
         loadRide();
-    }, [params.rideId]);
+    }, [rideId]);
 
     const loadRide = async () => {
         try {
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/rides/${params.rideId}`
+                `${process.env.NEXT_PUBLIC_API_URL}/rides/${rideId}`
             );
             const data = await response.json();
 
@@ -69,7 +70,7 @@ export default function RideDetailPage({ params }: { params: { rideId: string } 
         const token = localStorage.getItem('token');
 
         if (!token) {
-            router.push(`/auth/login?redirect=/ride/${params.rideId}`);
+            router.push(`/auth/login?redirect=/ride/${rideId}`);
             return;
         }
 
