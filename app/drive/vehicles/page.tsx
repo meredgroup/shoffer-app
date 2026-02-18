@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+export const dynamic = 'force-dynamic';
+
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toPersianNumber } from '@/lib/jalali';
@@ -16,7 +18,7 @@ interface Vehicle {
     is_verified: boolean;
 }
 
-export default function VehiclesPage() {
+function VehiclesContent() {
     const [mounted, setMounted] = useState(false);
     const [vehicles, setVehicles] = useState<Vehicle[]>([]);
     const [loading, setLoading] = useState(true);
@@ -500,5 +502,17 @@ export default function VehiclesPage() {
                 </Link>
             </nav>
         </div>
+    );
+}
+
+export default function VehiclesPage() {
+    return (
+        <Suspense fallback={
+            <div className="container" style={{ padding: 'var(--space-xl)' }}>
+                <div className="skeleton skeleton-card" style={{ height: '600px' }}></div>
+            </div>
+        }>
+            <VehiclesContent />
+        </Suspense>
     );
 }

@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+export const dynamic = 'force-dynamic';
+
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { formatJalaliDateTime, formatPrice, toPersianNumber } from '@/lib/jalali';
@@ -18,7 +20,7 @@ interface Ride {
     booking_count: number;
 }
 
-export default function MyRidesPage() {
+function MyRidesContent() {
     const [mounted, setMounted] = useState(false);
     const [rides, setRides] = useState<Ride[]>([]);
     const [loading, setLoading] = useState(true);
@@ -370,5 +372,17 @@ export default function MyRidesPage() {
                 </Link>
             </nav>
         </div>
+    );
+}
+
+export default function MyRidesPage() {
+    return (
+        <Suspense fallback={
+            <div className="container" style={{ padding: 'var(--space-xl)' }}>
+                <div className="skeleton skeleton-card" style={{ height: '600px' }}></div>
+            </div>
+        }>
+            <MyRidesContent />
+        </Suspense>
     );
 }

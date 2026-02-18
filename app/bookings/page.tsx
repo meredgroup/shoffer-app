@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+export const dynamic = 'force-dynamic';
+
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { formatJalaliDateTime, formatPrice as formatPersianPrice, toPersianNumber } from '@/lib/jalali';
@@ -20,7 +22,7 @@ interface Booking {
     other_party_avatar?: string;
 }
 
-export default function BookingsPage() {
+function BookingsContent() {
     const [mounted, setMounted] = useState(false);
     const [bookings, setBookings] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
@@ -359,5 +361,17 @@ export default function BookingsPage() {
                 </Link>
             </nav>
         </div>
+    );
+}
+
+export default function BookingsPage() {
+    return (
+        <Suspense fallback={
+            <div className="container" style={{ padding: 'var(--space-xl)' }}>
+                <div className="skeleton skeleton-card" style={{ height: '600px' }}></div>
+            </div>
+        }>
+            <BookingsContent />
+        </Suspense>
     );
 }

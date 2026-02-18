@@ -1,6 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+export const dynamic = 'force-dynamic';
+
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { formatJalaliDateTime, formatPrice as formatPersianPrice, toPersianNumber } from '@/lib/jalali';
@@ -26,7 +28,7 @@ interface Ride {
     color: string;
 }
 
-export default function SearchPage() {
+function SearchContent() {
     const searchParams = useSearchParams();
     const [mounted, setMounted] = useState(false);
     const [rides, setRides] = useState<Ride[]>([]);
@@ -418,5 +420,17 @@ export default function SearchPage() {
                 </Link>
             </nav>
         </div>
+    );
+}
+
+export default function SearchPage() {
+    return (
+        <Suspense fallback={
+            <div className="container" style={{ padding: 'var(--space-xl) var(--space-md)' }}>
+                <div className="skeleton skeleton-card" style={{ height: '600px' }}></div>
+            </div>
+        }>
+            <SearchContent />
+        </Suspense>
     );
 }
